@@ -3,12 +3,13 @@ import {
   ConctactListItem,
   DeleteButton,
 } from './ContactList.styled';
-import { deleteContact } from 'redux/contactsSlice';
+import { deleteContact } from 'redux/operations';
 import { useDispatch, useSelector } from 'react-redux';
+import { getContacts, getFilter } from 'redux/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(state => state.contacts);
-  const filterValue = useSelector(state => state.filter);
+  const contacts = useSelector(getContacts);
+  const filterValue = useSelector(getFilter);
   const dispatch = useDispatch();
 
   const filteredContacts = (() => {

@@ -10,13 +10,14 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
+import { getContacts } from 'redux/selectors';
 
 export const ContactForm = () => {
   const nameID = nanoid();
   const numberID = nanoid();
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(getContacts);
 
   const validationSchema = yup.object().shape({
     name: yup
@@ -56,7 +57,7 @@ export const ContactForm = () => {
       return;
     }
 
-    dispatch(addContact(name, number));
+    dispatch(addContact({ name, number }));
     reset({ name: '', number: '' });
   };
 
