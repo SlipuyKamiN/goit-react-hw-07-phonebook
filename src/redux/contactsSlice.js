@@ -9,6 +9,7 @@ const handlePending = state => {
 const handleFulfilled = state => {
   state.error = null;
   if (state.contacts.length === 0) {
+    console.log('Empty');
     state.status = IDLE;
     return;
   }
